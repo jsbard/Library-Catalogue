@@ -1,0 +1,29 @@
+extends layout
+
+block content
+
+      h1 Books
+      form#search(method="POST" action="/search")
+        input(type="text" id="search-field" placeholder="Search For Books..." name="searchValue")
+        input(type="submit" value="Search")
+
+      p
+        a.button(href='/books/new') Create New Book
+
+      table#book-table
+        thead
+          tr
+            th Title
+            th Author
+            th Genre
+            th Year
+        tbody
+          for book in locals.books
+            tr
+              td
+                a(href=`/books/${book.id}`) #{book.title}
+              td #{book.author}
+              td #{book.genre}
+              td #{book.year}
+      div#page-buttons
+
