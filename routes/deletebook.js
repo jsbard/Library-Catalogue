@@ -5,9 +5,13 @@ var book = require("../models").Book;
 router.post('/books/:id/delete', function(req, res, next) {
 
     (async () => {
-            const currentBook = await book.findByPk(req.params.id);
-            await currentBook.destroy();
-            res.redirect("/books");
+            try {
+                const currentBook = await book.findByPk(req.params.id);
+                await currentBook.destroy();
+                res.redirect("/books");
+            } catch (err) {
+                res.render("update-book", {err: true});
+            }
         }
     )();
 
