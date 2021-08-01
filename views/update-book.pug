@@ -1,29 +1,29 @@
 extends layout.pug
 block content
     h1 Update Book
-        form(method="POST" action=`/books/${locals.id}`)
-            if locals.err === true
-                h2.error Oooops!
-                    ul.error
-                        li Title is required
-                        li Author is required
-            p
-                label(for='title') Title
-                input#title(name='title' type='text' value=`${locals.title}`)
-            p
-                label(for='author') Author
-                input#author(name='author' type='text' value=`${locals.author}`)
-            p
-                label(for='genre') Genre
-                input#genre(name='genre' type='text' value=`${locals.genre}`)
-            p
-                label(for='year') Year
-                input#year(name='year' type='text' value=`${locals.year}`)
-            p
-                input(type='submit' value='Update Book')
+    form(method="POST" action=`/books/${locals.id}`)
+        if locals.err === true
+            h2.error Oooops!
+                ul.error
+                    li Title is required
+                    li Author is required
+        p
+            label(for='title') Title
+            input#title(name='title' type='text' value=`${locals.title}`)
+        p
+            label(for='author') Author
+            input#author(name='author' type='text' value=`${locals.author}`)
+        p
+            label(for='genre') Genre
+            input#genre(name='genre' type='text' value=`${locals.genre}`)
+        p
+            label(for='year') Year
+            input#year(name='year' type='text' value=`${locals.year}`)
+        p
+            input(type='submit' value='Update Book')
 
-        form(method='POST' action=`/books/${locals.id}/delete` onsubmit=`return confirm("Are you sure you want to delete this book?")`)
-            p
-                a.button(href='/books') Cancel
-            p
-                input(type='submit' value='Delete Book')
+    form(method='POST' action=`/books/${locals.id}/delete` onsubmit=`return confirm("Are you sure you want to delete this book?")`)
+        p
+            a.button(href='/books') Cancel
+        p
+            input(type='submit' value='Delete Book')

@@ -2,8 +2,6 @@ extends layout.pug
 
 block content
     h1 New Book
-    if locals.msg !== null
-        h3
     form(action="/books/new" method="POST")
         if locals.err === true
             h2.error Oooops!
