@@ -36,22 +36,26 @@ app.post("/search", searchRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.render("page-not-found");
-  next(createError(404, "Sorry, couldn't find the page you were looking for!"));
+    res.status(404);
+    res.render("page-not-found", {err: true});
+    console.log("404 HANDLER");
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-
+  console.log("GLOBAL HANDLER");
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  if (!err.message) {
-    err.message = "Sorry, something funky happened on our end...";
-  }
+    if (err.status === 404) {
+        res.render("page-not-found", {err: true});
+    } else {
+        res.status(err.status || 500);
+        err.message = "Sorry, something funky happened on our end...";
+        res.render('error', {err});
+    }
 
-  res.render('error', {err});
 });
 
 try {

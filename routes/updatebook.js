@@ -5,8 +5,7 @@ var book = require("../models").Book;
 router.get('/books/:id', function(req, res, next) {
 
         (async () => {
-            const bookExists = await book.findOne({ where: { id: req.params.id } });
-            if (bookExists) {
+            try {
                 const currentBook = await book.findByPk(req.params.id);
                 const data = {
                     id: currentBook.id,
@@ -17,8 +16,8 @@ router.get('/books/:id', function(req, res, next) {
                 }
 
                 res.render("update-book", data);
-            } else {
-                res.render("page-not-found");
+            } catch (err) {
+                next();
             }
         })();
 
