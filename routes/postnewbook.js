@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var book = require("../models").Book;
 
-router.post('/books/new', function(req, res, next) {
-    (async () => {
+router.post('/books/new', async function(req, res, next) {
+
         try {
             await book.create({
                 title: req.body.title,
@@ -15,7 +15,6 @@ router.post('/books/new', function(req, res, next) {
         } catch (err) {
             res.render("new-book", {err: true});
         }
-    })();
 });
 
 module.exports = router;

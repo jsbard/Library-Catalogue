@@ -35,14 +35,14 @@ app.post("/books/:id/delete", deleteBookRouter);
 app.post("/search", searchRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function(req, res) {
     res.status(404);
     res.render("page-not-found", {err: true});
     console.log("404 HANDLER");
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   console.log("GLOBAL HANDLER");
   // set locals, only providing error in development
   res.locals.message = err.message;

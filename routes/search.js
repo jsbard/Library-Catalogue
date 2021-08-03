@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var book = require("../models").Book;
 
-router.post('/search', function(req, res, next) {
+router.post('/search', async function(req, res, next) {
 
-    (async () => {
         const books = await book.findAll();
         const returnedBooks = [];
         const searchValue = req.body.searchValue.toUpperCase();
@@ -20,8 +19,6 @@ router.post('/search', function(req, res, next) {
         }
 
         res.render("index", {title: "Search Results", books: returnedBooks});
-
-    })();
 
 });
 

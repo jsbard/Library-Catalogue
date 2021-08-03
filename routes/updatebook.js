@@ -2,9 +2,7 @@ var express = require('express');
 var router = express.Router();
 var book = require("../models").Book;
 
-router.get('/books/:id', function(req, res, next) {
-
-        (async () => {
+router.get('/books/:id', async function(req, res, next) {
             try {
                 const currentBook = await book.findByPk(req.params.id);
                 const data = {
@@ -19,12 +17,9 @@ router.get('/books/:id', function(req, res, next) {
             } catch (err) {
                 next();
             }
-        })();
-
 });
 
-router.post('/books/:id', function(req, res, next){
-    (async () => {
+router.post('/books/:id', async function(req, res){
         try {
             const currentBook = await book.findByPk(req.params.id);
             const data = {
@@ -52,7 +47,6 @@ router.post('/books/:id', function(req, res, next){
 
             res.render("update-book", {...data, err: true, id: req.params.id});
         }
-    })();
 });
 
 module.exports = router;
